@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>10x10 Grid</title>
+    <style>
+      /* Style the grid container */
+      #grid-container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px;
+        padding: 10px;
+      }
+
+      /* Style the grid items */
+      .grid-item {
+        background-color: lightgray;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="grid-container">
+      <!-- Generate grid items with JavaScript -->
+    </div>
+
+    <script>
+      // Get the grid container element
+      const gridContainer = document.getElementById("grid-container");
+	  const usedValues = new Set();
+
+      // Loop through each row and column to generate the grid items
+      for (let row = 1; row <= 2; row++) {
+        for (let col = 1; col <= 7; col++) {
+          // Create a new grid item element
+          const gridItem = document.createElement("div");
+          gridItem.classList.add("grid-item");
+
+		  let letter, number;
+		  do {
+		    letter = String.fromCharCode(65 + Math.floor(Math.random() * 10));
+		    number = Math.floor(Math.random() * 10) + 1;
+		    var value = letter + number;
+		  } while (usedValues.has(value));
+
+		  // Add the value to the set of used values
+		  usedValues.add(value);
+
+          // Set the content 
+          gridItem.textContent = letter + number;
+
+          // Add the grid item to the container
+          gridContainer.appendChild(gridItem);
+        }
+      }
+    </script>
+  </body>
+</html>
